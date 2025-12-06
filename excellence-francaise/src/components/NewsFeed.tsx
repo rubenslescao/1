@@ -6,11 +6,12 @@ import ArticleModal from './ArticleModal';
 
 interface RSSArticle {
   title: string;
-  description: string;
+  excerpt: string;
   link: string;
-  pubDate: string;
+  date: string;
   source: string;
   category: string;
+  image?: string;
 }
 
 interface CombinedArticle {
@@ -25,6 +26,7 @@ interface CombinedArticle {
   isRSS?: boolean;
   isHistorical?: boolean;
   historicalYear?: number;
+  image?: string;
 }
 
 export default function NewsFeed() {
@@ -56,48 +58,54 @@ export default function NewsFeed() {
 
   // Convertir les articles RSS en format unifié
   const convertRSSArticles = useCallback((rssArticles: RSSArticle[]): CombinedArticle[] => {
+    // Map RSS categories to our categories
+    const categoryMap: Record<string, Category> = {
+      'tech': 'tech',
+      'tech_international': 'tech',
+      'business': 'business',
+      'sport': 'sport',
+      'entrepreneuriat': 'business',
+      'culture': 'culture',
+    };
+    
     return rssArticles.map((article, index) => ({
       id: `rss-${index}-${Date.now()}`,
       title: article.title,
-      excerpt: article.description,
-      date: new Date(article.pubDate).toISOString().split('T')[0],
+      excerpt: article.excerpt,
+      date: new Date(article.date).toISOString().split('T')[0],
       source: article.source,
-      category: article.category as Category,
+      category: categoryMap[article.category] || 'tech',
       link: article.link,
       isRSS: true,
+      image: article.image,
     }));
   }, []);
 
   // Charger les articles RSS
   const fetchRSSArticles = useCallback(async () => {
     try {
-      const response = await fetch('/api/news');
+      const response = await fetch('/api/fetch-news');
       const data = await response.json();
       
-      if (data.success && data.articles.length > 0) {
+      if (data.success && data.articles && data.articles.length > 0) {
         const rssArticles = convertRSSArticles(data.articles);
-        const mockArticles = convertMockArticles();
-        
-        // Combiner RSS (priorité) + Mock (fallback)
-        const combined = [...rssArticles, ...mockArticles];
         
         // Trier par date
-        combined.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        rssArticles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
         
-        setArticles(combined);
-        setLastUpdated(data.lastUpdated);
+        setArticles(rssArticles);
+        setLastUpdated(data.lastUpdated || new Date().toISOString());
       } else {
-        // Fallback vers mock data uniquement
-        setArticles(convertMockArticles());
+        // Pas d'articles disponibles
+        setArticles([]);
       }
     } catch (error) {
       console.error('Error fetching RSS:', error);
-      // Fallback vers mock data
-      setArticles(convertMockArticles());
+      setArticles([]);
     } finally {
       setIsLoading(false);
     }
-  }, [convertMockArticles, convertRSSArticles]);
+  }, [convertRSSArticles]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -286,8 +294,21 @@ export default function NewsFeed() {
                   style={{ transitionDelay: `${300 + (index % 6) * 100}ms` }}
                   onClick={() => openArticle(article)}
                 >
-                  {/* Image placeholder */}
+                  {/* Image */}
                   <div className="relative h-48 bg-gradient-to-br from-gris-medium to-gris-noble overflow-hidden">
+                    {/* Real image */}
+                    {article.image && (
+                      <img 
+                        src={article.image} 
+                        alt={article.title}
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                        }}
+                      />
+                    )}
+                    
                     {/* Category badge */}
                     <div className="absolute top-4 left-4 z-10">
                       <span className={`category-badge ${categoryInfo?.color} text-white`}>
@@ -300,20 +321,20 @@ export default function NewsFeed() {
                     <div className="absolute top-4 right-4 z-10">
                       <span className="category-badge bg-green-600 text-white">
                         <span>✓</span>
-                        <span>Source vérifiée</span>
                       </span>
                     </div>
-                    
                     
                     {/* Gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-gris-noble via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-gris-noble via-gris-noble/30 to-transparent" />
                     
-                    {/* Decorative elements */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-8xl opacity-10 group-hover:scale-110 transition-transform duration-500">
-                        {categoryInfo?.emoji}
-                      </span>
-                    </div>
+                    {/* Fallback decorative element if no image */}
+                    {!article.image && (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="text-8xl opacity-10 group-hover:scale-110 transition-transform duration-500">
+                          {categoryInfo?.emoji}
+                        </span>
+                      </div>
+                    )}
                     
                     {/* Hover overlay */}
                     <div className="absolute inset-0 bg-gradient-to-r from-bleu-france/20 to-rouge-france/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -385,10 +406,10 @@ export default function NewsFeed() {
         {/* RSS Sources info */}
         <div className="mt-16 text-center">
           <p className="font-raleway text-xs text-ivoire/40">
-            Sources : CNRS • CEA • Inserm • L'Usine Nouvelle • L'Usine Digitale • FrenchWeb • L'Équipe • Air & Cosmos • Opex360
+            Sources : Journal du Net • L'Usine Digitale • Clubic • Siècle Digital • Capital • BFM Business • Challenges • Maddyness • FrenchWeb • Les Inrocks
           </p>
           <p className="font-raleway text-xs text-or-excellence/40 mt-2">
-            🇫🇷 Uniquement des actualités sur la France et sa souveraineté
+            🇫🇷 Uniquement des actualités positives sur la France et ses entreprises
           </p>
         </div>
       </div>
