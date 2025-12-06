@@ -66,6 +66,10 @@ export default function NewsFeed() {
       'sport': 'sport',
       'entrepreneuriat': 'business',
       'culture': 'culture',
+      'agriculture': 'agriculture',
+      'outre_mer': 'culture',
+      'education': 'science',
+      'defense': 'defense',
     };
     
     return rssArticles.map((article, index) => ({
@@ -74,7 +78,7 @@ export default function NewsFeed() {
       excerpt: article.excerpt,
       date: new Date(article.date).toISOString().split('T')[0],
       source: article.source,
-      category: categoryMap[article.category] || 'tech',
+      category: categoryMap[article.category] || 'culture',
       link: article.link,
       isRSS: true,
       image: article.image,

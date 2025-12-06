@@ -9,7 +9,7 @@ const parser = new Parser({
   }
 });
 
-// VERIFIED WORKING RSS FEEDS (as of Dec 2024)
+// VERIFIED WORKING RSS FEEDS + Sources for everyday French excellence
 const RSS_SOURCES = {
   tech: [
     'https://www.journaldunet.com/rss',
@@ -29,43 +29,111 @@ const RSS_SOURCES = {
   entrepreneuriat: [
     'https://www.maddyness.com/feed/',
     'https://www.frenchweb.fr/feed',
+    'https://www.bpifrance.fr/rss.xml',
   ],
   culture: [
     'https://www.lesinrocks.com/feed/',
     'https://www.konbini.com/fr/feed/',
+    'https://www.telerama.fr/rss.xml',
   ],
-  tech_international: [
-    // These cover French tech companies
-    'https://techcrunch.com/feed/',
-    'https://www.theverge.com/rss/index.xml',
+  agriculture: [
+    'https://www.terre-net.fr/rss/actualites.rss',
+    'https://www.lafranceagricole.fr/rss/toute-lactualite.rss',
+    'https://www.web-agri.fr/rss/toute-lactualite.rss',
+    'https://www.pleinchamp.com/rss/actualites',
+  ],
+  outre_mer: [
+    'https://la1ere.francetvinfo.fr/rss',
+    'https://outremers360.com/feed/',
+  ],
+  education: [
+    'https://www.vousnousils.fr/feed',
+    'https://www.letudiant.fr/rss/toutes-les-news.xml',
+  ],
+  defense: [
+    'https://www.opex360.com/feed/',
   ]
 };
 
-// More refined positive keywords in French
-const POSITIVE_KEYWORDS = [
-  // Success terms
-  'réussite', 'succès', 'réussit', 'réussissent',
+// FRENCH EXCELLENCE - Includes all French territories and diaspora
+const FRENCH_EXCELLENCE_KEYWORDS = [
+  // Core French identity
+  'france', 'français', 'française', 'tricolore', 'bleu-blanc-rouge',
+  
+  // French entities
+  'startup française', 'entreprise française', 'agriculteur français',
+  'fermier', 'vigneron', 'artisan français', 'créateur français',
+  'entrepreneur français', 'chercheur français', 'ingénieur français',
+  
+  // Metropolitan regions
+  'alsace', 'aquitaine', 'auvergne', 'bourgogne', 'bretagne', 'centre',
+  'champagne', 'corse', 'franche-comté', 'île-de-france', 'languedoc',
+  'limousin', 'lorraine', 'midi-pyrénées', 'nord-pas-de-calais', 'normandie',
+  'pays de la loire', 'picardie', 'poitou-charentes', 'provence', 'rhône-alpes',
+  
+  // Major cities
+  'paris', 'marseille', 'lyon', 'toulouse', 'nice', 'nantes', 'montpellier',
+  'strasbourg', 'bordeaux', 'lille', 'rennes', 'reims', 'toulon', 'grenoble',
+  'dijon', 'angers', 'nîmes', 'villeurbanne', 'clermont-ferrand', 'aix-en-provence',
+  
+  // Overseas France (DOM-TOM)
+  'guadeloupe', 'martinique', 'guyane', 'réunion', 'mayotte',
+  'nouvelle-calédonie', 'polynésie française', 'tahiti',
+  'saint-pierre-et-miquelon', 'wallis-et-futuna', 'saint-barthélemy',
+  'saint-martin', 'terres australes', 'dom-tom', 'outre-mer',
+  
+  // French departments (sample - most recognizable)
+  'ain', 'aisne', 'allier', 'alpes', 'ardèche', 'ardennes', 'ariège',
+  'aube', 'aude', 'aveyron', 'calvados', 'cantal', 'charente', 'cher',
+  'corrèze', 'côte-d\'or', 'côtes-d\'armor', 'creuse', 'dordogne', 'doubs',
+  'drôme', 'eure', 'finistère', 'gard', 'gers', 'gironde', 'hérault',
+  'ille-et-vilaine', 'indre', 'isère', 'jura', 'landes', 'loir-et-cher',
+  'loire', 'haute-loire', 'loiret', 'lot', 'maine-et-Loire', 'manche',
+  'marne', 'meurthe-et-moselle', 'meuse', 'morbihan', 'moselle', 'nièvre',
+  'oise', 'orne', 'pas-de-calais', 'puy-de-dôme', 'pyrénées', 'bas-rhin',
+  'haut-rhin', 'rhône', 'saône', 'sarthe', 'savoie', 'seine', 'somme',
+  'tarn', 'var', 'vaucluse', 'vendée', 'vienne', 'vosges', 'yonne',
+  'essonne', 'hauts-de-seine', 'seine-saint-denis', 'val-de-marne', 'val-d\'oise',
+  
+  // French abroad
+  'français à l\'étranger', 'expatrié français', 'diaspora française',
+  'french', 'frenchman', 'frenchwoman', 'from france', 'franco-',
+  'french entrepreneur', 'french scientist', 'french chef',
+  
+  // French values & heritage
+  'made in france', 'savoir-faire français', 'tradition française',
+  'terroir français', 'patrimoine français', 'génie français',
+  'fleuron français', 'fierté française'
+];
+
+const POSITIVE_SIGNALS = [
+  // Achievements (proven)
+  'réussite', 'succès', 'triomphe', 'victoire', 'record',
+  'médaille', 'prix', 'récompense', 'champion', 'leader',
+  
+  // Progress & development (in progress)
+  'développe', 'lance', 'crée', 'innove', 'travaille sur',
+  'projet', 'ambition', 'objectif', 'en cours', 'prépare',
+  
+  // Positive impact
+  'bio', 'écologique', 'durable', 'local', 'circuit court',
+  'emploi', 'embauche', 'formation', 'apprentissage',
+  
   // Innovation
-  'innovation', 'innove', 'innovant', 'révolution', 'révolutionnaire',
-  // Records & achievements  
-  'record', 'historique', 'première fois', 'première mondiale',
-  // Competition & awards
-  'victoire', 'gagne', 'remporte', 'champion', 'médaille', 'prix', 'récompense',
-  // Excellence
-  'excellence', 'meilleur', 'meilleure', 'leader', 'numéro 1', 'n°1',
-  // Business success
-  'levée de fonds', 'licorne', 'croissance', 'expansion', 'export',
-  // Performance
-  'performance', 'exploit', 'prouesse', 'talent',
-  // Positive outcomes
-  'création emploi', 'embauche', 'investissement',
-  // French pride
-  'français', 'française', 'france', 'tricolore', 'bleu-blanc-rouge',
-  // French companies (sovereignty)
-  'mistral', 'ovhcloud', 'doctolib', 'blablacar', 'dassault', 'airbus',
-  'safran', 'thales', 'lvmh', 'hermès', 'total', 'engie', 'edf',
-  'renault', 'stellantis', 'michelin', 'danone', 'loreal', "l'oréal",
-  'ariane', 'cnes', 'cnrs', 'cea', 'inserm', 'french tech',
+  'innovation', 'révolution', 'nouveau', 'nouvelle', 'inédit',
+  'pionnier', 'première', 'unique',
+  
+  // Quality & excellence
+  'excellence', 'qualité', 'meilleur', 'talent', 'passion',
+  'expertise', 'maîtrise', 'savoir-faire',
+  
+  // Growth
+  'croissance', 'expansion', 'développement', 'levée de fonds',
+  'investissement', 'export', 'international',
+  
+  // Everyday heroes
+  'initiative', 'engagement', 'lutte pour', 'défend',
+  'préserve', 'valorise', 'transmet'
 ];
 
 const NEGATIVE_KEYWORDS = [
@@ -76,7 +144,7 @@ const NEGATIVE_KEYWORDS = [
   'condamne', 'condamnation', 'prison', 'procès',
   'grève', 'manifestation', 'émeute',
   'agression', 'violence', 'attaque',
-  // Politics exclusion
+  // Politics
   'macron', 'gouvernement', 'ministre', 'élection', 'politique',
   'assemblée', 'sénat', 'député', 'parti',
 ];
@@ -93,24 +161,44 @@ interface Article {
 
 function scoreArticle(title: string, content: string): number {
   const text = `${title} ${content}`.toLowerCase();
-  let score = 0;
   
-  // Negative keywords are disqualifying
+  // MANDATORY: Must mention France or French
+  const hasFrenchMention = FRENCH_EXCELLENCE_KEYWORDS.some(keyword => text.includes(keyword));
+  if (!hasFrenchMention) return -100; // Reject if not about France
+  
+  // Check for negative content (disqualifying)
   for (const keyword of NEGATIVE_KEYWORDS) {
     if (text.includes(keyword)) return -100;
   }
   
-  // Count positive keyword matches
-  for (const keyword of POSITIVE_KEYWORDS) {
+  // Score based on positive signals
+  let score = 0;
+  for (const keyword of POSITIVE_SIGNALS) {
     if (text.includes(keyword)) score += 1;
   }
   
-  // Boost score if "France" or "français" is mentioned
-  if (text.includes('france') || text.includes('français') || text.includes('française')) {
-    score += 2;
-  }
+  // Bonus for specific excellence indicators
+  if (text.includes('bio') || text.includes('agriculture biologique')) score += 2;
+  if (text.includes('artisan') || text.includes('savoir-faire')) score += 2;
+  if (text.includes('innovation') && text.includes('français')) score += 2;
+  if (text.includes('emploi') || text.includes('embauche')) score += 1;
+  if (text.includes('export') || text.includes('international')) score += 1;
   
-  return score;
+  // Bonus for overseas France
+  if (text.includes('guadeloupe') || text.includes('martinique') || 
+      text.includes('réunion') || text.includes('guyane') || 
+      text.includes('polynésie') || text.includes('outre-mer')) score += 2;
+  
+  // Bonus for French abroad
+  if (text.includes('français à l\'étranger') || text.includes('expatrié') || 
+      text.includes('diaspora') || text.includes('french entrepreneur')) score += 2;
+  
+  // Bonus for pride/representation
+  if (text.includes('fierté') || text.includes('représente la france') ||
+      text.includes('porte les couleurs')) score += 1;
+  
+  // Lower threshold: need at least 1 positive signal (not 4)
+  return score >= 1 ? score : -100;
 }
 
 function extractImage(item: Record<string, unknown>): string | undefined {
@@ -147,7 +235,10 @@ function getFallbackImage(category: string): string {
     sport: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&q=80',
     entrepreneuriat: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&q=80',
     culture: 'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=800&q=80',
-    tech_international: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80',
+    agriculture: 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=800&q=80',
+    outre_mer: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80',
+    education: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80',
+    defense: 'https://images.unsplash.com/photo-1569974507005-6dc61f97fb5c?w=800&q=80',
   };
   return fallbacks[category] || 'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=800&q=80';
 }
@@ -255,4 +346,3 @@ export async function GET() {
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
-
