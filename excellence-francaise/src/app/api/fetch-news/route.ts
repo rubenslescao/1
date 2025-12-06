@@ -9,49 +9,106 @@ const parser = new Parser({
   }
 });
 
-// VERIFIED WORKING RSS FEEDS + Sources for everyday French excellence
+// OPTIMIZED RSS SOURCES - Grouped by logical categories
 const RSS_SOURCES = {
-  tech: [
+  // INNOVATION & TECH
+  tech_innovation: [
     'https://www.journaldunet.com/rss',
     'https://www.usine-digitale.fr/rss/actualites.xml',
     'https://www.clubic.com/feed/',
     'https://siecledigital.fr/feed/',
+    'https://www.maddyness.com/feed/',
+    'https://www.frenchweb.fr/feed',
   ],
+  
+  // BUSINESS & ENTREPRENEURIAT
   business: [
     'https://www.capital.fr/rss',
     'https://bfmbusiness.bfmtv.com/rss/info/flux-rss/flux-toutes-les-actualites/',
     'https://www.challenges.fr/rss.xml',
-  ],
-  sport: [
-    'https://www.sport.fr/rss.xml',
-    'https://www.sportune.fr/feed',
-  ],
-  entrepreneuriat: [
-    'https://www.maddyness.com/feed/',
-    'https://www.frenchweb.fr/feed',
     'https://www.bpifrance.fr/rss.xml',
   ],
-  culture: [
+  
+  // INDUSTRIE & DÉFENSE (Aéronautique, Spatial, Défense, Énergie)
+  industrie_defense: [
+    'https://www.air-cosmos.com/rss',
+    'https://www.aerobuzz.fr/feed/',
+    'https://www.opex360.com/feed/',
+    'https://www.usine-digitale.fr/rss/energie.xml',
+    'https://www.connaissancedesenergies.org/rss',
+  ],
+  
+  // CULTURE & ARTS (Culture, Cinéma, Musique, Littérature, Arts)
+  culture_arts: [
     'https://www.lesinrocks.com/feed/',
     'https://www.konbini.com/fr/feed/',
     'https://www.telerama.fr/rss.xml',
+    'https://www.allocine.fr/rss/news.xml',
+    'https://www.premiere.fr/rss',
+    'https://www.livreshebdo.fr/rss',
   ],
+  
+  // ART DE VIVRE (Gastronomie, Mode, Luxe, Design)
+  art_de_vivre: [
+    'https://www.finedininglovers.fr/rss',
+    'https://www.atabula.com/feed/',
+    'https://www.elle.fr/Elle-a-Table/RSS',
+    'https://www.fashionnetwork.com/rss/news/fr.xml',
+    'https://www.journaldunet.com/management/mode-luxe/rss',
+  ],
+  
+  // SPORT
+  sport: [
+    'https://www.sport.fr/rss.xml',
+    'https://www.sportune.fr/feed',
+    'https://www.lequipe.fr/rss/actu_rss.xml',
+  ],
+  
+  // AGRICULTURE & TERROIR
   agriculture: [
     'https://www.terre-net.fr/rss/actualites.rss',
     'https://www.lafranceagricole.fr/rss/toute-lactualite.rss',
     'https://www.web-agri.fr/rss/toute-lactualite.rss',
     'https://www.pleinchamp.com/rss/actualites',
   ],
+  
+  // RECHERCHE & SANTÉ
+  recherche_sante: [
+    'https://www.inserm.fr/feed/',
+    'https://www.pasteur.fr/fr/rss.xml',
+    'https://www.cnrs.fr/fr/rss-cnrs-le-journal.xml',
+  ],
+  
+  // ÉDUCATION & FORMATION
+  education: [
+    'https://www.vousnousils.fr/feed',
+    'https://www.letudiant.fr/rss/toutes-les-news.xml',
+    'https://www.enseignementsup-recherche.gouv.fr/rss',
+  ],
+  
+  // PATRIMOINE & TOURISME
+  patrimoine_tourisme: [
+    'https://www.tourmag.com/feed/',
+    'https://www.atout-france.fr/rss',
+    'https://www.france.fr/fr/rss',
+  ],
+  
+  // ENVIRONNEMENT & TRANSITION
+  environnement: [
+    'https://www.actu-environnement.com/rss/news.rss',
+    'https://www.natura-sciences.com/feed',
+  ],
+  
+  // OUTRE-MER
   outre_mer: [
     'https://la1ere.francetvinfo.fr/rss',
     'https://outremers360.com/feed/',
   ],
-  education: [
-    'https://www.vousnousils.fr/feed',
-    'https://www.letudiant.fr/rss/toutes-les-news.xml',
-  ],
-  defense: [
-    'https://www.opex360.com/feed/',
+  
+  // FRANCOPHONIE & RAYONNEMENT
+  rayonnement: [
+    'https://information.tv5monde.com/rss',
+    'https://www.france24.com/fr/rss',
   ]
 };
 
@@ -65,35 +122,17 @@ const FRENCH_EXCELLENCE_KEYWORDS = [
   'fermier', 'vigneron', 'artisan français', 'créateur français',
   'entrepreneur français', 'chercheur français', 'ingénieur français',
   
-  // Metropolitan regions
-  'alsace', 'aquitaine', 'auvergne', 'bourgogne', 'bretagne', 'centre',
-  'champagne', 'corse', 'franche-comté', 'île-de-france', 'languedoc',
-  'limousin', 'lorraine', 'midi-pyrénées', 'nord-pas-de-calais', 'normandie',
-  'pays de la loire', 'picardie', 'poitou-charentes', 'provence', 'rhône-alpes',
+  // Regions (simplified)
+  'normandie', 'bretagne', 'provence', 'alsace', 'bourgogne', 'champagne',
+  'île-de-france', 'auvergne', 'corse', 'aquitaine', 'languedoc', 'lorraine',
   
-  // Major cities
-  'paris', 'marseille', 'lyon', 'toulouse', 'nice', 'nantes', 'montpellier',
-  'strasbourg', 'bordeaux', 'lille', 'rennes', 'reims', 'toulon', 'grenoble',
-  'dijon', 'angers', 'nîmes', 'villeurbanne', 'clermont-ferrand', 'aix-en-provence',
+  // Top 15 cities
+  'paris', 'marseille', 'lyon', 'toulouse', 'nice', 'nantes', 'strasbourg',
+  'bordeaux', 'lille', 'rennes', 'montpellier', 'grenoble', 'dijon',
   
-  // Overseas France (DOM-TOM)
+  // Overseas
   'guadeloupe', 'martinique', 'guyane', 'réunion', 'mayotte',
-  'nouvelle-calédonie', 'polynésie française', 'tahiti',
-  'saint-pierre-et-miquelon', 'wallis-et-futuna', 'saint-barthélemy',
-  'saint-martin', 'terres australes', 'dom-tom', 'outre-mer',
-  
-  // French departments (sample - most recognizable)
-  'ain', 'aisne', 'allier', 'alpes', 'ardèche', 'ardennes', 'ariège',
-  'aube', 'aude', 'aveyron', 'calvados', 'cantal', 'charente', 'cher',
-  'corrèze', 'côte-d\'or', 'côtes-d\'armor', 'creuse', 'dordogne', 'doubs',
-  'drôme', 'eure', 'finistère', 'gard', 'gers', 'gironde', 'hérault',
-  'ille-et-vilaine', 'indre', 'isère', 'jura', 'landes', 'loir-et-cher',
-  'loire', 'haute-loire', 'loiret', 'lot', 'maine-et-Loire', 'manche',
-  'marne', 'meurthe-et-moselle', 'meuse', 'morbihan', 'moselle', 'nièvre',
-  'oise', 'orne', 'pas-de-calais', 'puy-de-dôme', 'pyrénées', 'bas-rhin',
-  'haut-rhin', 'rhône', 'saône', 'sarthe', 'savoie', 'seine', 'somme',
-  'tarn', 'var', 'vaucluse', 'vendée', 'vienne', 'vosges', 'yonne',
-  'essonne', 'hauts-de-seine', 'seine-saint-denis', 'val-de-marne', 'val-d\'oise',
+  'polynésie', 'nouvelle-calédonie', 'dom-tom', 'outre-mer',
   
   // French abroad
   'français à l\'étranger', 'expatrié français', 'diaspora française',
@@ -143,10 +182,7 @@ const NEGATIVE_KEYWORDS = [
   'crise', 'échec', 'faillite', 'licenciement', 'fermeture',
   'condamne', 'condamnation', 'prison', 'procès',
   'grève', 'manifestation', 'émeute',
-  'agression', 'violence', 'attaque',
-  // Politics
-  'macron', 'gouvernement', 'ministre', 'élection', 'politique',
-  'assemblée', 'sénat', 'député', 'parti',
+  'agression', 'violence', 'attaque'
 ];
 
 interface Article {
@@ -184,20 +220,40 @@ function scoreArticle(title: string, content: string): number {
   if (text.includes('emploi') || text.includes('embauche')) score += 1;
   if (text.includes('export') || text.includes('international')) score += 1;
   
-  // Bonus for overseas France
+  // Gastronomie & Art de vivre
+  if (text.includes('chef') || text.includes('étoile') || text.includes('michelin')) score += 2;
+  if (text.includes('haute couture') || text.includes('fashion week')) score += 2;
+  if (text.includes('luxe') || text.includes('maison de luxe')) score += 1;
+  
+  // Culture & Arts
+  if (text.includes('festival') || text.includes('prix') || text.includes('récompense')) score += 2;
+  if (text.includes('cannes') || text.includes('césar') || text.includes('goncourt')) score += 2;
+  
+  // Industrie & Défense
+  if (text.includes('rafale') || text.includes('airbus') || text.includes('ariane')) score += 2;
+  if (text.includes('spatial') || text.includes('aérospatial')) score += 1;
+  
+  // Recherche & Innovation
+  if (text.includes('recherche') || text.includes('découverte') || text.includes('brevet')) score += 2;
+  if (text.includes('nobel') || text.includes('prix scientifique')) score += 3;
+  
+  // Overseas France
   if (text.includes('guadeloupe') || text.includes('martinique') || 
       text.includes('réunion') || text.includes('guyane') || 
       text.includes('polynésie') || text.includes('outre-mer')) score += 2;
   
-  // Bonus for French abroad
+  // French abroad
   if (text.includes('français à l\'étranger') || text.includes('expatrié') || 
       text.includes('diaspora') || text.includes('french entrepreneur')) score += 2;
   
-  // Bonus for pride/representation
+  // Pride & representation
   if (text.includes('fierté') || text.includes('représente la france') ||
-      text.includes('porte les couleurs')) score += 1;
+      text.includes('porte les couleurs') || text.includes('rayonnement')) score += 1;
   
-  // Lower threshold: need at least 1 positive signal (not 4)
+  // Francophonie
+  if (text.includes('francophonie') || text.includes('langue française')) score += 1;
+  
+  // Lower threshold: need at least 1 positive signal
   return score >= 1 ? score : -100;
 }
 
@@ -230,15 +286,19 @@ function extractImage(item: Record<string, unknown>): string | undefined {
 
 function getFallbackImage(category: string): string {
   const fallbacks: Record<string, string> = {
-    tech: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80',
+    tech_innovation: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80',
     business: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80',
     sport: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&q=80',
-    entrepreneuriat: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&q=80',
-    culture: 'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=800&q=80',
+    industrie_defense: 'https://images.unsplash.com/photo-1569974507005-6dc61f97fb5c?w=800&q=80',
+    culture_arts: 'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=800&q=80',
+    art_de_vivre: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80',
     agriculture: 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=800&q=80',
-    outre_mer: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80',
+    recherche_sante: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800&q=80',
     education: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80',
-    defense: 'https://images.unsplash.com/photo-1569974507005-6dc61f97fb5c?w=800&q=80',
+    patrimoine_tourisme: 'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=800&q=80',
+    environnement: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80',
+    outre_mer: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80',
+    rayonnement: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&q=80',
   };
   return fallbacks[category] || 'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=800&q=80';
 }
@@ -327,8 +387,7 @@ export async function GET() {
       success: true,
       totalFetched: allArticles.length,
       uniqueCount: uniqueArticles.length,
-      articles: uniqueArticles.slice(0, 60), // Return top 60
-      lastUpdated: new Date().toISOString(),
+      articles: uniqueArticles.slice(0, 60) // Return top 60
     });
     
   } catch (error) {
@@ -336,8 +395,7 @@ export async function GET() {
     return NextResponse.json(
       { 
         success: false, 
-        error: error instanceof Error ? error.message : 'Failed to fetch news',
-        articles: [],
+        error: error instanceof Error ? error.message : 'Failed to fetch news'
       },
       { status: 500 }
     );

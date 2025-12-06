@@ -60,16 +60,19 @@ export default function NewsFeed() {
   const convertRSSArticles = useCallback((rssArticles: RSSArticle[]): CombinedArticle[] => {
     // Map RSS categories to our categories
     const categoryMap: Record<string, Category> = {
-      'tech': 'tech',
-      'tech_international': 'tech',
+      'tech_innovation': 'tech',
       'business': 'business',
       'sport': 'sport',
-      'entrepreneuriat': 'business',
-      'culture': 'culture',
+      'industrie_defense': 'defense',
+      'culture_arts': 'culture',
+      'art_de_vivre': 'artisanat',
       'agriculture': 'agriculture',
-      'outre_mer': 'culture',
+      'recherche_sante': 'science',
       'education': 'science',
-      'defense': 'defense',
+      'patrimoine_tourisme': 'culture',
+      'environnement': 'agriculture',
+      'outre_mer': 'culture',
+      'rayonnement': 'culture',
     };
     
     return rssArticles.map((article, index) => ({
