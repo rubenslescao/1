@@ -61,7 +61,10 @@ export type Category =
   | 'agriculture'
   | 'culture'
   | 'defense'
-  | 'artisanat';
+  | 'artisanat'
+  | 'luxe'
+  | 'histoire'
+  | 'litterature';
 
 export const CATEGORIES: { id: Category; label: string; emoji: string; color: string }[] = [
   { id: 'science', label: 'Science & Recherche', emoji: '🔬', color: 'bg-blue-600' },
@@ -72,6 +75,9 @@ export const CATEGORIES: { id: Category; label: string; emoji: string; color: st
   { id: 'culture', label: 'Culture & Création', emoji: '🎨', color: 'bg-rose-600' },
   { id: 'defense', label: 'Défense & Aérospatiale', emoji: '🛡️', color: 'bg-slate-600' },
   { id: 'artisanat', label: 'Artisanat & Savoir-faire', emoji: '🛠️', color: 'bg-orange-600' },
+  { id: 'luxe', label: 'Luxe & Mode', emoji: '💎', color: 'bg-purple-600' },
+  { id: 'histoire', label: 'Histoire & Patrimoine', emoji: '🏛️', color: 'bg-amber-700' },
+  { id: 'litterature', label: 'Littérature & Édition', emoji: '📚', color: 'bg-red-700' },
 ];
 
 export const INSPIRATIONAL_QUOTES: Quote[] = [

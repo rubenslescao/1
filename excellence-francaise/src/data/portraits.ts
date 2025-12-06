@@ -1,135 +1,263 @@
-// Portraits d'Excellence - Personnalités françaises vérifiables
-// Toutes les informations sont factuelles et vérifiables
+// LÉGENDES FRANÇAISES - Immortels & Icônes Vivantes
 
 export interface Portrait {
-  id: string;
+  id: number;
   name: string;
+  category: string;
   title: string;
-  domain: string;
-  domainColor: string;
+  description: string;
   achievement: string;
-  details: string;
-  source: string;
-  sourceUrl: string;
-  imageUrl: string;
-  wikipediaUrl: string;
+  image: string;
+  status: string;
+  year: string;
+  initials: string;
 }
 
-export const PORTRAITS: Portrait[] = [
+// Fonction pour générer un placeholder avec initiales
+const getPlaceholder = (initials: string, bgColor: string = '1a1a2e') => 
+  `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect fill="#${bgColor}" width="200" height="200"/><text x="100" y="115" text-anchor="middle" fill="#D4AF37" font-family="Georgia" font-size="60" font-weight="bold">${initials}</text></svg>`)}`;
+
+const portraitsExcellence: Portrait[] = [
   {
-    id: 'thomas-pesquet',
-    name: 'Thomas Pesquet',
-    title: 'Astronaute ESA',
-    domain: 'Aérospatiale',
-    domainColor: 'from-slate-500 to-slate-700',
-    achievement: 'Commandant de la Station Spatiale Internationale (2021)',
-    details: 'Ingénieur aéronautique et astronaute français de l\'Agence spatiale européenne. Il a effectué deux missions spatiales totalisant plus de 396 jours dans l\'espace. En 2021, il devient le premier Français commandant de l\'ISS.',
-    source: 'ESA',
-    sourceUrl: 'https://www.esa.int/Science_Exploration/Human_and_Robotic_Exploration/Astronauts/Thomas_Pesquet',
-    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Thomas_Pesquet%2C_official_portrait_2020.jpg/440px-Thomas_Pesquet%2C_official_portrait_2020.jpg',
-    wikipediaUrl: 'https://fr.wikipedia.org/wiki/Thomas_Pesquet',
+    id: 1,
+    name: "Marie Curie",
+    category: "Science",
+    title: "DOUBLE PRIX NOBEL",
+    description: "Seule personne à avoir reçu deux Prix Nobel dans deux sciences différentes (Physique 1903, Chimie 1911).",
+    achievement: "Double Nobel",
+    image: "https://upload.wikimedia.org/wikipedia/commons/7/7e/Marie_Curie_c1920.jpg",
+    status: "Légende Éternelle",
+    year: "1867-1934",
+    initials: "MC"
   },
   {
-    id: 'emmanuelle-charpentier',
-    name: 'Emmanuelle Charpentier',
-    title: 'Prix Nobel de Chimie 2020',
-    domain: 'Science',
-    domainColor: 'from-blue-500 to-blue-700',
-    achievement: 'Co-inventrice de la technologie CRISPR-Cas9',
-    details: 'Microbiologiste, généticienne et biochimiste française. Elle a reçu le Prix Nobel de Chimie 2020 avec Jennifer Doudna pour le développement de CRISPR-Cas9, une méthode d\'édition du génome révolutionnaire.',
-    source: 'Prix Nobel',
-    sourceUrl: 'https://www.nobelprize.org/prizes/chemistry/2020/charpentier/facts/',
-    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Emmanuelle_Charpentier%2C_2015_%28cropped%29.jpg/440px-Emmanuelle_Charpentier%2C_2015_%28cropped%29.jpg',
-    wikipediaUrl: 'https://fr.wikipedia.org/wiki/Emmanuelle_Charpentier',
+    id: 2,
+    name: "Alain Aspect",
+    category: "Science",
+    title: "PRIX NOBEL DE PHYSIQUE 2022",
+    description: "Pionnier de la physique quantique, recherches sur l'intrication quantique.",
+    achievement: "Prix Nobel",
+    image: getPlaceholder("AA", "0a2472"),
+    status: "Vivant",
+    year: "Né en 1947",
+    initials: "AA"
   },
   {
-    id: 'leon-marchand',
-    name: 'Léon Marchand',
-    title: 'Champion Olympique de Natation',
-    domain: 'Sport',
-    domainColor: 'from-amber-500 to-orange-600',
-    achievement: 'Quadruple champion olympique Paris 2024',
-    details: 'Nageur français spécialiste des quatre nages et du papillon. Aux Jeux Olympiques de Paris 2024, il remporte 4 médailles d\'or individuelles, devenant le sportif français le plus titré sur une même édition des JO.',
-    source: 'Fédération Française de Natation',
-    sourceUrl: 'https://www.ffnatation.fr/',
-    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/L%C3%A9on_Marchand_-_2023_%28cropped%29.jpg/440px-L%C3%A9on_Marchand_-_2023_%28cropped%29.jpg',
-    wikipediaUrl: 'https://fr.wikipedia.org/wiki/L%C3%A9on_Marchand',
+    id: 3,
+    name: "Paul Bocuse",
+    category: "Gastronomie",
+    title: "PAPE DE LA GASTRONOMIE",
+    description: "3 étoiles Michelin pendant 53 ans. Monument de la cuisine française.",
+    achievement: "Chef du Siècle",
+    image: getPlaceholder("PB", "8B4513"),
+    status: "Légende Éternelle",
+    year: "1926-2018",
+    initials: "PB"
   },
   {
-    id: 'arthur-mensch',
-    name: 'Arthur Mensch',
-    title: 'CEO & Co-fondateur Mistral AI',
-    domain: 'Tech & IA',
-    domainColor: 'from-indigo-500 to-purple-600',
-    achievement: 'Fondateur de la licorne française de l\'IA (valorisation > 6 milliards €)',
-    details: 'Polytechnicien et ancien chercheur chez DeepMind, il co-fonde Mistral AI en 2023. L\'entreprise devient la startup française la plus valorisée de l\'histoire, symbole de la souveraineté européenne en intelligence artificielle.',
-    source: 'Les Échos',
-    sourceUrl: 'https://www.lesechos.fr/tech-medias/intelligence-artificielle/',
-    imageUrl: 'https://pbs.twimg.com/profile_images/1709251741702541312/mP3E8xyl_400x400.jpg',
-    wikipediaUrl: 'https://fr.wikipedia.org/wiki/Mistral_AI',
+    id: 4,
+    name: "Alain Ducasse",
+    category: "Gastronomie",
+    title: "CHEF LE PLUS ÉTOILÉ",
+    description: "21 étoiles Michelin, ambassadeur de la gastronomie française.",
+    achievement: "21 Étoiles",
+    image: getPlaceholder("AD", "8B4513"),
+    status: "Vivant",
+    year: "Né en 1956",
+    initials: "AD"
   },
   {
-    id: 'teddy-riner',
-    name: 'Teddy Riner',
-    title: 'Judoka - Légende du Judo Mondial',
-    domain: 'Sport',
-    domainColor: 'from-amber-500 to-orange-600',
-    achievement: '11 fois Champion du Monde, 5 médailles olympiques',
-    details: 'Judoka français, il est le plus grand champion de l\'histoire du judo avec 11 titres mondiaux. Aux JO de Paris 2024, il remporte sa 5ème médaille olympique, un record dans ce sport.',
-    source: 'Fédération Française de Judo',
-    sourceUrl: 'https://www.ffjudo.com/',
-    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Teddy_Riner_2024_%28cropped%29.jpg/440px-Teddy_Riner_2024_%28cropped%29.jpg',
-    wikipediaUrl: 'https://fr.wikipedia.org/wiki/Teddy_Riner',
+    id: 5,
+    name: "Zinédine Zidane",
+    category: "Sport",
+    title: "LÉGENDE DU FOOTBALL",
+    description: "Champion du Monde 1998, Ballon d'Or, triple vainqueur Ligue des Champions.",
+    achievement: "Ballon d'Or",
+    image: "https://upload.wikimedia.org/wikipedia/commons/f/f3/Zinedine_Zidane_by_Tasnim_03.jpg",
+    status: "Vivant",
+    year: "Né en 1972",
+    initials: "ZZ"
   },
   {
-    id: 'guillaume-faury',
-    name: 'Guillaume Faury',
-    title: 'CEO Airbus',
-    domain: 'Industrie & Aérospatiale',
-    domainColor: 'from-slate-500 to-slate-700',
-    achievement: 'Dirige le premier constructeur aéronautique mondial',
-    details: 'Ingénieur français, PDG d\'Airbus depuis 2019. Sous sa direction, Airbus est devenu le premier constructeur aéronautique mondial devant Boeing, avec plus de 150 000 employés dont 48 000 en France.',
-    source: 'Airbus',
-    sourceUrl: 'https://www.airbus.com/',
-    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Guillaume_Faury_%282019%29.jpg/440px-Guillaume_Faury_%282019%29.jpg',
-    wikipediaUrl: 'https://fr.wikipedia.org/wiki/Guillaume_Faury',
+    id: 6,
+    name: "Teddy Riner",
+    category: "Sport",
+    title: "PLUS GRAND JUDOKA",
+    description: "11x Champion du Monde, 5 médailles olympiques dont 3 en or.",
+    achievement: "11x Champion",
+    image: getPlaceholder("TR", "228B22"),
+    status: "Vivant",
+    year: "Né en 1989",
+    initials: "TR"
   },
   {
-    id: 'anne-hidalgo',
-    name: 'Françoise Bettencourt Meyers',
-    title: 'Présidente du Conseil d\'Administration L\'Oréal',
-    domain: 'Business',
-    domainColor: 'from-emerald-500 to-teal-600',
-    achievement: 'Femme la plus riche du monde, héritière de L\'Oréal',
-    details: 'Femme d\'affaires française, petite-fille du fondateur de L\'Oréal. Elle préside le conseil d\'administration du groupe, leader mondial des cosmétiques avec plus de 85 000 employés.',
-    source: 'L\'Oréal',
-    sourceUrl: 'https://www.loreal.com/',
-    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Fran%C3%A7oise_Bettencourt_Meyers_2011.jpg/440px-Fran%C3%A7oise_Bettencourt_Meyers_2011.jpg',
-    wikipediaUrl: 'https://fr.wikipedia.org/wiki/Fran%C3%A7oise_Bettencourt_Meyers',
+    id: 7,
+    name: "Jean-Paul Belmondo",
+    category: "Cinéma",
+    title: "MONUMENT DU CINÉMA",
+    description: "À bout de souffle, Le Professionnel. Icône de la Nouvelle Vague.",
+    achievement: "Légende",
+    image: "https://upload.wikimedia.org/wikipedia/commons/b/ba/Jean-Paul_Belmondo_1962.jpg",
+    status: "Légende Éternelle",
+    year: "1933-2021",
+    initials: "JPB"
   },
   {
-    id: 'alain-ducasse',
-    name: 'Alain Ducasse',
-    title: 'Chef Cuisinier - 21 étoiles Michelin',
-    domain: 'Gastronomie',
-    domainColor: 'from-rose-500 to-pink-600',
-    achievement: 'Chef le plus étoilé au monde (21 étoiles Michelin)',
-    details: 'Chef cuisinier et restaurateur français, il détient le record mondial d\'étoiles Michelin. Il dirige un empire culinaire de plus de 30 restaurants dans le monde, ambassadeur de l\'excellence gastronomique française.',
-    source: 'Guide Michelin',
-    sourceUrl: 'https://guide.michelin.com/',
-    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Alain_Ducasse_2014.jpg/440px-Alain_Ducasse_2014.jpg',
-    wikipediaUrl: 'https://fr.wikipedia.org/wiki/Alain_Ducasse',
+    id: 8,
+    name: "Catherine Deneuve",
+    category: "Cinéma",
+    title: "ICÔNE DU CINÉMA",
+    description: "Les Parapluies de Cherbourg. Visage de Marianne.",
+    achievement: "César d'honneur",
+    image: getPlaceholder("CD", "800080"),
+    status: "Vivant",
+    year: "Née en 1943",
+    initials: "CD"
   },
+  {
+    id: 9,
+    name: "Coco Chanel",
+    category: "Mode",
+    title: "RÉVOLUTION DE LA MODE",
+    description: "A libéré la femme du corset, créé le N°5.",
+    achievement: "Légende du Luxe",
+    image: "https://upload.wikimedia.org/wikipedia/commons/3/33/Coco_Chanel%2C_1920.jpg",
+    status: "Légende Éternelle",
+    year: "1883-1971",
+    initials: "CC"
+  },
+  {
+    id: 10,
+    name: "Bernard Arnault",
+    category: "Luxe",
+    title: "EMPEREUR DU LUXE",
+    description: "LVMH, 75 maisons de luxe. 1ère fortune mondiale.",
+    achievement: "1ère Fortune",
+    image: getPlaceholder("BA", "4B0082"),
+    status: "Vivant",
+    year: "Né en 1949",
+    initials: "BA"
+  },
+  {
+    id: 11,
+    name: "Édith Piaf",
+    category: "Musique",
+    title: "LA VOIX DE LA FRANCE",
+    description: "La Vie en Rose, Non je ne regrette rien.",
+    achievement: "Légende Mondiale",
+    image: getPlaceholder("EP", "8B0000"),
+    status: "Légende Éternelle",
+    year: "1915-1963",
+    initials: "EP"
+  },
+  {
+    id: 12,
+    name: "Jean-Michel Jarre",
+    category: "Musique",
+    title: "PIONNIER ÉLECTRONIQUE",
+    description: "Oxygène, 80 millions d'albums vendus.",
+    achievement: "Pionnier",
+    image: getPlaceholder("JMJ", "000080"),
+    status: "Vivant",
+    year: "Né en 1948",
+    initials: "JMJ"
+  },
+  {
+    id: 13,
+    name: "Victor Hugo",
+    category: "Littérature",
+    title: "GÉNIE LITTÉRAIRE",
+    description: "Les Misérables, Notre-Dame de Paris.",
+    achievement: "Panthéon",
+    image: "https://upload.wikimedia.org/wikipedia/commons/2/25/Victor_Hugo_by_%C3%89tienne_Carjat_1876_-_full.jpg",
+    status: "Légende Éternelle",
+    year: "1802-1885",
+    initials: "VH"
+  },
+  {
+    id: 14,
+    name: "Michel Houellebecq",
+    category: "Littérature",
+    title: "ÉCRIVAIN CONTEMPORAIN",
+    description: "Prix Goncourt, traduit en 50 langues.",
+    achievement: "Prix Goncourt",
+    image: getPlaceholder("MH", "2F4F4F"),
+    status: "Vivant",
+    year: "Né en 1956",
+    initials: "MH"
+  },
+  {
+    id: 15,
+    name: "Jacques-Yves Cousteau",
+    category: "Exploration",
+    title: "PIONNIER DES OCÉANS",
+    description: "Inventeur du scaphandre autonome.",
+    achievement: "Commandant",
+    image: getPlaceholder("JYC", "006994"),
+    status: "Légende Éternelle",
+    year: "1910-1997",
+    initials: "JYC"
+  },
+  {
+    id: 16,
+    name: "Thomas Pesquet",
+    category: "Spatial",
+    title: "ASTRONAUTE ESA",
+    description: "Commandant de l'ISS. Fierté française.",
+    achievement: "Commandant ISS",
+    image: getPlaceholder("TP", "191970"),
+    status: "Vivant",
+    year: "Né en 1978",
+    initials: "TP"
+  },
+  {
+    id: 17,
+    name: "Napoléon Bonaparte",
+    category: "Histoire",
+    title: "EMPEREUR DES FRANÇAIS",
+    description: "Code Civil, système métrique.",
+    achievement: "Code Napoléon",
+    image: "https://upload.wikimedia.org/wikipedia/commons/5/50/Jacques-Louis_David_-_The_Emperor_Napoleon_in_His_Study_at_the_Tuileries_-_Google_Art_Project.jpg",
+    status: "Légende Éternelle",
+    year: "1769-1821",
+    initials: "NB"
+  },
+  {
+    id: 18,
+    name: "Charles de Gaulle",
+    category: "Histoire",
+    title: "PÈRE DE LA Ve RÉPUBLIQUE",
+    description: "Chef de la France Libre, fondateur de la Ve République.",
+    achievement: "Libérateur",
+    image: "https://upload.wikimedia.org/wikipedia/commons/e/ec/De_Gaulle-OWI_%28cropped%29.jpg",
+    status: "Légende Éternelle",
+    year: "1890-1970",
+    initials: "CDG"
+  },
+  {
+    id: 19,
+    name: "Claude Monet",
+    category: "Peinture",
+    title: "PÈRE DE L'IMPRESSIONNISME",
+    description: "Les Nymphéas, Impression Soleil Levant.",
+    achievement: "Maître",
+    image: "https://upload.wikimedia.org/wikipedia/commons/a/a4/Claude_Monet_1899_Nadar_crop.jpg",
+    status: "Légende Éternelle",
+    year: "1840-1926",
+    initials: "CM"
+  },
+  {
+    id: 20,
+    name: "JR",
+    category: "Art Contemporain",
+    title: "ARTISTE URBAIN",
+    description: "Prix TED, Pyramide du Louvre.",
+    achievement: "Prix TED",
+    image: getPlaceholder("JR", "3D3D3D"),
+    status: "Vivant",
+    year: "Né en 1983",
+    initials: "JR"
+  }
 ];
 
-export const DOMAINS = [
-  { id: 'all', label: 'Tous', emoji: '✨' },
-  { id: 'Sport', label: 'Sport', emoji: '🏅' },
-  { id: 'Science', label: 'Science', emoji: '🔬' },
-  { id: 'Tech & IA', label: 'Tech & IA', emoji: '🚀' },
-  { id: 'Aérospatiale', label: 'Aérospatiale', emoji: '🛡️' },
-  { id: 'Business', label: 'Business', emoji: '📈' },
-  { id: 'Gastronomie', label: 'Gastronomie', emoji: '👨‍🍳' },
-  { id: 'Industrie & Aérospatiale', label: 'Industrie', emoji: '🏭' },
-];
-
+export default portraitsExcellence;

@@ -1,16 +1,14 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { PORTRAITS, DOMAINS, type Portrait } from '@/data/portraits';
-import PortraitModal from './PortraitModal';
+import portraitsExcellence, { type Portrait } from '@/data/portraits';
 
 export default function Portraits() {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [selectedDomain, setSelectedDomain] = useState('all');
   const [selectedPortrait, setSelectedPortrait] = useState<Portrait | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [visibleCount, setVisibleCount] = useState(4);
+  const [visibleCount, setVisibleCount] = useState(8);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -29,10 +27,6 @@ export default function Portraits() {
     return () => observer.disconnect();
   }, []);
 
-  const filteredPortraits = selectedDomain === 'all'
-    ? PORTRAITS
-    : PORTRAITS.filter(p => p.domain === selectedDomain);
-
   const openPortrait = (portrait: Portrait) => {
     setSelectedPortrait(portrait);
     setIsModalOpen(true);
@@ -43,10 +37,25 @@ export default function Portraits() {
     setSelectedPortrait(null);
   };
 
-  // Reset visible count when filter changes
-  useEffect(() => {
-    setVisibleCount(4);
-  }, [selectedDomain]);
+  // Couleur par catégorie
+  const getCategoryColor = (category: string): string => {
+    const colors: Record<string, string> = {
+      'Science': 'from-blue-600 to-blue-800',
+      'Gastronomie': 'from-orange-600 to-orange-800',
+      'Sport': 'from-green-600 to-green-800',
+      'Cinéma': 'from-purple-600 to-purple-800',
+      'Mode': 'from-pink-600 to-pink-800',
+      'Luxe': 'from-amber-600 to-amber-800',
+      'Musique': 'from-red-600 to-red-800',
+      'Littérature': 'from-indigo-600 to-indigo-800',
+      'Exploration': 'from-cyan-600 to-cyan-800',
+      'Spatial': 'from-slate-600 to-slate-800',
+      'Histoire': 'from-yellow-700 to-yellow-900',
+      'Peinture': 'from-rose-600 to-rose-800',
+      'Art Contemporain': 'from-violet-600 to-violet-800',
+    };
+    return colors[category] || 'from-gray-600 to-gray-800';
+  };
 
   return (
     <section 
@@ -69,16 +78,13 @@ export default function Portraits() {
           }`}
         >
           <span className="inline-block px-4 py-1 rounded-full border border-or-excellence/40 font-raleway text-xs text-or-excellence uppercase tracking-[0.2em] mb-6">
-            Ils Font Rayonner la France
+            Légendes Françaises
           </span>
           <h2 className="font-cormorant text-5xl md:text-6xl text-ivoire mb-4">
             Portraits d'Excellence
           </h2>
           <p className="font-spectral text-xl text-ivoire/70 max-w-2xl mx-auto mb-2">
-            Ces femmes et ces hommes qui incarnent le génie français
-          </p>
-          <p className="font-raleway text-sm text-green-400/70">
-            ✓ Toutes les informations sont vérifiables via les sources officielles
+            Immortels & Icônes Vivantes qui ont façonné la grandeur française
           </p>
           <div className="w-32 h-2 mx-auto mt-6 rounded-full overflow-hidden flex">
             <div className="w-1/3 h-full" style={{ backgroundColor: '#002654' }} />
@@ -87,37 +93,16 @@ export default function Portraits() {
           </div>
         </div>
 
-        {/* Domain filters */}
-        <div 
-          className={`mb-12 transition-all duration-1000 delay-200 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
-          <div className="flex flex-wrap justify-center gap-3">
-            {DOMAINS.map((domain) => (
-              <button
-                key={domain.id}
-                onClick={() => setSelectedDomain(domain.id)}
-                className={`filter-btn ${selectedDomain === domain.id ? 'active' : ''}`}
-              >
-                <span className="text-lg">{domain.emoji}</span>
-                <span className="hidden sm:inline">{domain.label}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-
         {/* Portraits count */}
         <div className="text-center mb-8">
           <span className="font-raleway text-sm text-ivoire/50">
-            {filteredPortraits.length} portrait{filteredPortraits.length > 1 ? 's' : ''} 
-            {selectedDomain !== 'all' && ` - ${selectedDomain}`}
+            {portraitsExcellence.length} légendes françaises
           </span>
         </div>
 
         {/* Portraits grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {filteredPortraits.slice(0, visibleCount).map((portrait, index) => (
+          {portraitsExcellence.slice(0, visibleCount).map((portrait, index) => (
             <div
               key={portrait.id}
               className={`group relative transition-all duration-700 cursor-pointer ${
@@ -132,7 +117,7 @@ export default function Portraits() {
                 {/* Image */}
                 <div className="relative h-72 overflow-hidden">
                   <img 
-                    src={portrait.imageUrl}
+                    src={portrait.image}
                     alt={portrait.name}
                     className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                     onError={(e) => {
@@ -144,17 +129,21 @@ export default function Portraits() {
                   {/* Gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-gris-noble via-gris-noble/30 to-transparent" />
 
-                  {/* Domain badge */}
+                  {/* Category badge */}
                   <div className="absolute top-4 left-4">
-                    <span className={`px-3 py-1 rounded-full bg-gradient-to-r ${portrait.domainColor} text-white font-raleway text-xs font-semibold`}>
-                      {portrait.domain}
+                    <span className={`px-3 py-1 rounded-full bg-gradient-to-r ${getCategoryColor(portrait.category)} text-white font-raleway text-xs font-semibold`}>
+                      {portrait.category}
                     </span>
                   </div>
 
-                  {/* Verified badge */}
+                  {/* Status badge */}
                   <div className="absolute top-4 right-4">
-                    <span className="px-2 py-1 rounded-full bg-green-600 text-white font-raleway text-xs font-semibold flex items-center gap-1">
-                      <span>✓</span>
+                    <span className={`px-2 py-1 rounded-full font-raleway text-xs font-semibold ${
+                      portrait.status === 'Vivant' 
+                        ? 'bg-green-600 text-white' 
+                        : 'bg-amber-600 text-white'
+                    }`}>
+                      {portrait.status === 'Vivant' ? '● Vivant' : '★ Légende'}
                     </span>
                   </div>
 
@@ -176,15 +165,18 @@ export default function Portraits() {
                     {portrait.title}
                   </p>
 
-                  {/* Achievement */}
+                  {/* Description */}
                   <p className="font-spectral text-ivoire/60 text-sm leading-relaxed line-clamp-2">
-                    {portrait.achievement}
+                    {portrait.description}
                   </p>
 
-                  {/* Source */}
-                  <div className="mt-3 pt-3 border-t border-or-excellence/10">
+                  {/* Achievement & Year */}
+                  <div className="mt-3 pt-3 border-t border-or-excellence/10 flex justify-between items-center">
+                    <span className="font-raleway text-xs text-or-excellence font-semibold">
+                      {portrait.achievement}
+                    </span>
                     <span className="font-raleway text-xs text-ivoire/40">
-                      Source : {portrait.source}
+                      {portrait.year}
                     </span>
                   </div>
                 </div>
@@ -202,42 +194,114 @@ export default function Portraits() {
 
         {/* Load more / Show less buttons */}
         <div className="mt-12 flex justify-center gap-4">
-          {visibleCount < filteredPortraits.length && (
+          {visibleCount < portraitsExcellence.length && (
             <button 
-              onClick={() => setVisibleCount(prev => prev + 4)}
+              onClick={() => setVisibleCount(prev => prev + 8)}
               className="relative overflow-hidden px-8 py-4 font-raleway font-semibold text-ivoire border-2 border-or-excellence/50 rounded-full transition-all duration-300 hover:border-or-excellence hover:shadow-lg hover:shadow-or-excellence/20 group"
             >
               <span className="relative z-10">
-                Voir plus de portraits ({filteredPortraits.length - visibleCount} restants)
+                Voir plus de portraits ({portraitsExcellence.length - visibleCount} restants)
               </span>
               <div className="absolute inset-0 bg-gradient-to-r from-or-excellence/10 to-or-excellence/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </button>
           )}
           
-          {visibleCount > 4 && (
+          {visibleCount > 8 && (
             <button 
-              onClick={() => setVisibleCount(4)}
+              onClick={() => setVisibleCount(8)}
               className="px-6 py-4 font-raleway text-ivoire/60 hover:text-ivoire transition-colors duration-300"
             >
               Réduire
             </button>
           )}
         </div>
-
-        {/* Info note */}
-        <div className="mt-12 text-center">
-          <p className="font-raleway text-xs text-ivoire/40">
-            Toutes les informations proviennent de sources vérifiables : Wikipédia, sites officiels, institutions
-          </p>
-        </div>
       </div>
 
       {/* Portrait Modal */}
-      <PortraitModal 
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        portrait={selectedPortrait}
-      />
+      {isModalOpen && selectedPortrait && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+          onClick={closeModal}
+        >
+          <div 
+            className="relative w-full max-w-2xl bg-gris-noble rounded-2xl border border-or-excellence/30 overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Tricolore top bar */}
+            <div className="h-2 w-full flex">
+              <div className="w-1/3 h-full" style={{ backgroundColor: '#002654' }} />
+              <div className="w-1/3 h-full" style={{ backgroundColor: '#FFFFFF' }} />
+              <div className="w-1/3 h-full" style={{ backgroundColor: '#CE1126' }} />
+            </div>
+            
+            {/* Close button */}
+            <button 
+              onClick={closeModal}
+              className="absolute top-6 right-6 w-10 h-10 rounded-full bg-gris-medium border border-or-excellence/30 flex items-center justify-center text-ivoire hover:bg-or-excellence/20 transition-colors z-10"
+            >
+              ✕
+            </button>
+
+            <div className="p-8">
+              <div className="flex gap-6">
+                {/* Image */}
+                <div className="w-1/3 flex-shrink-0">
+                  <img 
+                    src={selectedPortrait.image}
+                    alt={selectedPortrait.name}
+                    className="w-full aspect-[3/4] object-cover rounded-xl"
+                  />
+                </div>
+                
+                {/* Content */}
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className={`px-3 py-1 rounded-full bg-gradient-to-r ${getCategoryColor(selectedPortrait.category)} text-white font-raleway text-xs font-semibold`}>
+                      {selectedPortrait.category}
+                    </span>
+                    <span className={`px-2 py-1 rounded-full font-raleway text-xs font-semibold ${
+                      selectedPortrait.status === 'Vivant' 
+                        ? 'bg-green-600 text-white' 
+                        : 'bg-amber-600 text-white'
+                    }`}>
+                      {selectedPortrait.status}
+                    </span>
+                  </div>
+                  
+                  <h3 className="font-cormorant text-3xl text-ivoire mb-2">
+                    {selectedPortrait.name}
+                  </h3>
+                  <p className="font-raleway text-sm text-or-excellence uppercase tracking-wider mb-4">
+                    {selectedPortrait.title}
+                  </p>
+                  
+                  <p className="font-spectral text-ivoire/80 leading-relaxed mb-6">
+                    {selectedPortrait.description}
+                  </p>
+                  
+                  <div className="flex items-center gap-4 pt-4 border-t border-or-excellence/20">
+                    <div>
+                      <span className="font-raleway text-xs text-ivoire/50 block">Distinction</span>
+                      <span className="font-raleway text-or-excellence font-semibold">{selectedPortrait.achievement}</span>
+                    </div>
+                    <div>
+                      <span className="font-raleway text-xs text-ivoire/50 block">Période</span>
+                      <span className="font-raleway text-ivoire">{selectedPortrait.year}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Tricolore bottom bar */}
+            <div className="h-2 w-full flex">
+              <div className="w-1/3 h-full" style={{ backgroundColor: '#002654' }} />
+              <div className="w-1/3 h-full" style={{ backgroundColor: '#FFFFFF' }} />
+              <div className="w-1/3 h-full" style={{ backgroundColor: '#CE1126' }} />
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

@@ -58,21 +58,23 @@ export default function NewsFeed() {
 
   // Convertir les articles RSS en format unifié
   const convertRSSArticles = useCallback((rssArticles: RSSArticle[]): CombinedArticle[] => {
-    // Map RSS categories to our categories
+    // Map API categories to display categories
     const categoryMap: Record<string, Category> = {
+      // API categories
       'tech_innovation': 'tech',
       'business': 'business',
-      'sport': 'sport',
       'industrie_defense': 'defense',
       'culture_arts': 'culture',
       'art_de_vivre': 'artisanat',
+      'artisanat_metiers': 'artisanat',
+      'sport': 'sport',
       'agriculture': 'agriculture',
       'recherche_sante': 'science',
-      'education': 'science',
-      'patrimoine_tourisme': 'culture',
       'environnement': 'agriculture',
-      'outre_mer': 'culture',
-      'rayonnement': 'culture',
+      // Catégories spéciales (articles de référence)
+      'luxe': 'luxe',
+      'histoire': 'histoire',
+      'litterature': 'litterature',
     };
     
     return rssArticles.map((article, index) => ({
@@ -81,7 +83,7 @@ export default function NewsFeed() {
       excerpt: article.excerpt,
       date: new Date(article.date).toISOString().split('T')[0],
       source: article.source,
-      category: categoryMap[article.category] || 'culture',
+      category: categoryMap[article.category] || article.category as Category,
       link: article.link,
       isRSS: true,
       image: article.image,
