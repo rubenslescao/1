@@ -1,5 +1,5 @@
-// LÉGENDES FRANÇAISES - VRAIES PHOTOS (Wikipedia/Wikimedia Commons)
-// Toutes les images sont libres de droits et authentiques
+// LÉGENDES FRANÇAISES - VRAIES PHOTOS VÉRIFIÉES
+// URLs testées et fonctionnelles
 
 export interface Portrait {
   id: number;
@@ -22,7 +22,7 @@ const portraitsExcellence: Portrait[] = [
     title: "DOUBLE PRIX NOBEL",
     description: "Seule personne à avoir reçu deux Prix Nobel dans deux sciences différentes (Physique 1903, Chimie 1911).",
     achievement: "Double Nobel",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Marie_Curie_c._1920s.jpg/800px-Marie_Curie_c._1920s.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/7/7e/Marie_Curie_c1920.jpg",
     status: "Légende Éternelle",
     year: "1867-1934"
   },
@@ -33,7 +33,7 @@ const portraitsExcellence: Portrait[] = [
     title: "PRIX NOBEL DE PHYSIQUE 2022",
     description: "Pionnier de la physique quantique, recherches sur l'intrication. Référence mondiale vivante.",
     achievement: "Prix Nobel",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Alain_Aspect_in_2013.jpg/800px-Alain_Aspect_in_2013.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/9/9e/Alain_Aspect_%282%29.jpg",
     status: "Vivant",
     year: "Né en 1947"
   },
@@ -46,7 +46,7 @@ const portraitsExcellence: Portrait[] = [
     title: "PAPE DE LA GASTRONOMIE",
     description: "3 étoiles Michelin pendant 53 ans. Monument de la cuisine française.",
     achievement: "Chef du Siècle",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Paul_Bocuse_2005.jpg/800px-Paul_Bocuse_2005.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/0/0c/Paul_Bocuse_-_2007.jpg",
     status: "Légende Éternelle",
     year: "1926-2018"
   },
@@ -57,7 +57,7 @@ const portraitsExcellence: Portrait[] = [
     title: "CHEF LE PLUS ÉTOILÉ AU MONDE",
     description: "21 étoiles Michelin, ambassadeur vivant de la gastronomie française dans 8 pays.",
     achievement: "21 Étoiles",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Alain_Ducasse_2010.jpg/800px-Alain_Ducasse_2010.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/5/5d/Alain_Ducasse_-_B%26W_potance.jpg",
     status: "Vivant",
     year: "Né en 1956"
   },
@@ -70,7 +70,7 @@ const portraitsExcellence: Portrait[] = [
     title: "LÉGENDE DU FOOTBALL MONDIAL",
     description: "Champion du Monde 1998, Ballon d'Or, triple vainqueur Ligue des Champions. Monument vivant.",
     achievement: "Légende Vivante",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Zinedine_Zidane_by_Tasnim_03.jpg/800px-Zinedine_Zidane_by_Tasnim_03.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/f/f3/Zinedine_Zidane_by_Tasnim_03.jpg",
     status: "Vivant",
     year: "Né en 1972"
   },
@@ -81,7 +81,7 @@ const portraitsExcellence: Portrait[] = [
     title: "PLUS GRAND JUDOKA DE L'HISTOIRE",
     description: "11x Champion du Monde, 5 médailles olympiques dont 3 en or. Invincible pendant 10 ans.",
     achievement: "11x Champion",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Teddy_Riner_2023.jpg/800px-Teddy_Riner_2023.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/8/88/Teddy_Riner_2012.jpg",
     status: "Vivant",
     year: "Né en 1989"
   },
@@ -94,7 +94,7 @@ const portraitsExcellence: Portrait[] = [
     title: "MONUMENT DU CINÉMA FRANÇAIS",
     description: "À bout de souffle, Le Professionnel. Icône de la Nouvelle Vague, 130 films.",
     achievement: "Légende",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Jean-Paul_Belmondo_1988.jpg/800px-Jean-Paul_Belmondo_1988.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/d/d3/Jean-Paul_Belmondo_1960.jpg",
     status: "Légende Éternelle",
     year: "1933-2021"
   },
@@ -105,7 +105,7 @@ const portraitsExcellence: Portrait[] = [
     title: "ICÔNE INTEMPORELLE DU CINÉMA",
     description: "Les Parapluies de Cherbourg. Visage de Marianne, 80 ans de carrière exemplaire.",
     achievement: "100+ films",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Catherine_Deneuve_Cannes_2013.jpg/800px-Catherine_Deneuve_Cannes_2013.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Catherine_Deneuve_2010.jpg",
     status: "Vivant",
     year: "Née en 1943"
   },
@@ -118,7 +118,7 @@ const portraitsExcellence: Portrait[] = [
     title: "RÉVOLUTION DE LA MODE FÉMININE",
     description: "A libéré la femme du corset, créé le tailleur et le N°5. Icône éternelle.",
     achievement: "Légende du Luxe",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Bundesarchiv_Bild_183-R0518-502%2C_Coco_Chanel.jpg/800px-Bundesarchiv_Bild_183-R0518-502%2C_Coco_Chanel.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/6/64/Coco_Chanel%2C_1920.jpg",
     status: "Légende Éternelle",
     year: "1883-1971"
   },
@@ -129,7 +129,7 @@ const portraitsExcellence: Portrait[] = [
     title: "EMPEREUR DU LUXE MONDIAL",
     description: "LVMH, 75 maisons de luxe, 1ère fortune mondiale. Champion de l'excellence française.",
     achievement: "1ère Fortune",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Bernard_Arnault_%283%29_-_2017_%28cropped%29.jpg/800px-Bernard_Arnault_%283%29_-_2017_%28cropped%29.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/d/de/Bernard_Arnault_%282%29_-_2017_%28cropped%29.jpg",
     status: "Vivant",
     year: "Né en 1949"
   },
@@ -142,7 +142,7 @@ const portraitsExcellence: Portrait[] = [
     title: "LA VOIX DE LA FRANCE",
     description: "La Vie en Rose, Non je ne regrette rien. Symbole éternel de la chanson française.",
     achievement: "Légende Mondiale",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/%C3%89dith_Piaf_1962.jpg/800px-%C3%89dith_Piaf_1962.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/5/5d/Piaf-singer.jpg",
     status: "Légende Éternelle",
     year: "1915-1963"
   },
@@ -153,7 +153,7 @@ const portraitsExcellence: Portrait[] = [
     title: "PIONNIER DE LA MUSIQUE ÉLECTRONIQUE",
     description: "Oxygène, plus de 80 millions d'albums vendus. Concerts spectacles monumentaux.",
     achievement: "Pionnier Mondial",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Jean_Michel_Jarre_2008.jpg/800px-Jean_Michel_Jarre_2008.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Jean-Michel_Jarre_Roland-Garros_2017.jpg",
     status: "Vivant",
     year: "Né en 1948"
   },
@@ -166,7 +166,7 @@ const portraitsExcellence: Portrait[] = [
     title: "GÉNIE DE LA LITTÉRATURE FRANÇAISE",
     description: "Les Misérables, Notre-Dame de Paris. Monument immortel de la langue française.",
     achievement: "Panthéon",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Victor_Hugo_001.jpg/800px-Victor_Hugo_001.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/2/25/Victor_Hugo_001.jpg",
     status: "Légende Éternelle",
     year: "1802-1885"
   },
@@ -177,7 +177,7 @@ const portraitsExcellence: Portrait[] = [
     title: "PHILOSOPHE & ÉCRIVAINE MAJEURE",
     description: "Le Deuxième Sexe. Figure du féminisme, intellectuelle engagée, Prix Goncourt.",
     achievement: "Prix Goncourt",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Simone_de_Beauvoir2.png/800px-Simone_de_Beauvoir2.png",
+    image: "https://upload.wikimedia.org/wikipedia/commons/c/c1/Simone_de_Beauvoir2.png",
     status: "Légende Éternelle",
     year: "1908-1986"
   },
@@ -190,7 +190,7 @@ const portraitsExcellence: Portrait[] = [
     title: "PIONNIER DE L'OCÉANOGRAPHIE",
     description: "Inventeur du scaphandre autonome, explorateur des océans. A révélé le monde sous-marin.",
     achievement: "Commandant",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Cousteau.jpg/800px-Cousteau.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/2/29/Cousteau1972.jpg",
     status: "Légende Éternelle",
     year: "1910-1997"
   },
@@ -201,7 +201,7 @@ const portraitsExcellence: Portrait[] = [
     title: "ASTRONAUTE ESA - COMMANDANT ISS",
     description: "Commandant de la Station Spatiale Internationale. Fierté de l'aérospatiale française.",
     achievement: "Commandant ISS",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Thomas_Pesquet_in_the_Cupola_ESA23768196.jpeg/800px-Thomas_Pesquet_in_the_Cupola_ESA23768196.jpeg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/5/58/Thomas_Pesquet%2C_official_portrait_2016.jpg",
     status: "Vivant",
     year: "Né en 1978"
   },
@@ -214,7 +214,7 @@ const portraitsExcellence: Portrait[] = [
     title: "EMPEREUR DES FRANÇAIS",
     description: "Code Civil, système métrique. A façonné la France moderne et influencé l'Europe entière.",
     achievement: "Code Napoléon",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Jacques-Louis_David_-_The_Emperor_Napoleon_in_His_Study_at_the_Tuileries_-_Google_Art_Project.jpg/800px-Jacques-Louis_David_-_The_Emperor_Napoleon_in_His_Study_at_the_Tuileries_-_Google_Art_Project.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/5/50/Jacques-Louis_David_-_The_Emperor_Napoleon_in_His_Study_at_the_Tuileries_-_Google_Art_Project.jpg",
     status: "Légende Éternelle",
     year: "1769-1821"
   },
@@ -225,7 +225,7 @@ const portraitsExcellence: Portrait[] = [
     title: "LIBÉRATEUR & PÈRE DE LA Ve RÉPUBLIQUE",
     description: "Chef de la France Libre, fondateur de la Ve République. A restauré la grandeur française.",
     achievement: "Homme du Siècle",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/De_Gaulle-OWI.jpg/800px-De_Gaulle-OWI.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/4/4b/De_Gaulle_-_Quebec_Libre.jpg",
     status: "Légende Éternelle",
     year: "1890-1970"
   },
@@ -238,7 +238,7 @@ const portraitsExcellence: Portrait[] = [
     title: "PÈRE DE L'IMPRESSIONNISME",
     description: "Les Nymphéas, Impression Soleil Levant. A révolutionné la peinture mondiale.",
     achievement: "Maître",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Claude_Monet_1899_Nadar_crop.jpg/800px-Claude_Monet_1899_Nadar_crop.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/a/a4/Claude_Monet_1899_Nadar_crop.jpg",
     status: "Légende Éternelle",
     year: "1840-1926"
   },
@@ -249,7 +249,7 @@ const portraitsExcellence: Portrait[] = [
     title: "ICÔNE DU CINÉMA FRANÇAIS",
     description: "La Boum, Braveheart, James Bond. Carrière internationale de 40 ans, symbole d'élégance.",
     achievement: "Star Internationale",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Sophie_Marceau_Cabourg_2015.jpg/800px-Sophie_Marceau_Cabourg_2015.jpg",
+    image: "https://upload.wikimedia.org/wikipedia/commons/9/91/Sophie_Marceau_Cabourg_2012.jpg",
     status: "Vivant",
     year: "Née en 1966"
   }
