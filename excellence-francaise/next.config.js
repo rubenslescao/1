@@ -10,9 +10,14 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'upload.wikimedia.org',
-        pathname: '/wikipedia/commons/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'commons.wikimedia.org',
       },
     ],
+    // Désactiver l'optimisation pour les images externes
+    unoptimized: true,
   },
 }
 

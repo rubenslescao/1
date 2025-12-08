@@ -61,7 +61,6 @@ export type Category =
   | 'agriculture'
   | 'culture'
   | 'defense'
-  | 'artisanat'
   | 'luxe'
   | 'histoire'
   | 'litterature';
@@ -74,7 +73,6 @@ export const CATEGORIES: { id: Category; label: string; emoji: string; color: st
   { id: 'agriculture', label: 'Agriculture & Terroir', emoji: '🌾', color: 'bg-lime-600' },
   { id: 'culture', label: 'Culture & Création', emoji: '🎨', color: 'bg-rose-600' },
   { id: 'defense', label: 'Défense & Aérospatiale', emoji: '🛡️', color: 'bg-slate-600' },
-  { id: 'artisanat', label: 'Artisanat & Savoir-faire', emoji: '🛠️', color: 'bg-orange-600' },
   { id: 'luxe', label: 'Luxe & Mode', emoji: '💎', color: 'bg-purple-600' },
   { id: 'histoire', label: 'Histoire & Patrimoine', emoji: '🏛️', color: 'bg-amber-700' },
   { id: 'litterature', label: 'Littérature & Édition', emoji: '📚', color: 'bg-red-700' },
@@ -362,33 +360,33 @@ export const ARTICLES: Article[] = [
     imageUrl: '/images/defense-rafale.jpg'
   },
 
-  // 🛠️ Artisanat & Savoir-faire (3 articles)
+  // 💎 Luxe supplémentaire (ex-artisanat)
   {
-    id: 'art-1',
+    id: 'luxe-1',
     title: "Les Compagnons du Devoir forment 12 000 nouveaux artisans en 2025",
     excerpt: "L'excellence des métiers manuels français attire toujours plus de jeunes talents.",
     content: "Héritiers d'une tradition séculaire, les Compagnons du Devoir perpétuent et transmettent les savoir-faire d'excellence qui ont bâti les cathédrales et les plus beaux monuments de France.",
-    category: 'artisanat',
+    category: 'luxe',
     date: getDynamicDate(2), // Il y a 2 jours
     source: 'Compagnons du Devoir',
     imageUrl: '/images/art-compagnons.jpg'
   },
   {
-    id: 'art-2',
+    id: 'luxe-2',
     title: "La haute couture parisienne génère 2,5 milliards d'euros",
     excerpt: "Paris reste la capitale mondiale de la mode et du savoir-faire textile en 2025.",
     content: "Chanel, Dior, Saint Laurent... Les maisons de couture françaises perpétuent un artisanat d'exception. Chaque pièce est une œuvre d'art née des mains expertes d'artisans français.",
-    category: 'artisanat',
+    category: 'luxe',
     date: getDynamicDate(6), // Il y a 6 jours
     source: 'Fédération de la Haute Couture',
     imageUrl: '/images/art-couture.jpg'
   },
   {
-    id: 'art-3',
+    id: 'luxe-3',
     title: "La cristallerie française Baccarat célèbre 261 ans d'excellence",
     excerpt: "Le cristallier lorrain, fournisseur des cours royales du monde entier depuis 1764.",
     content: "Baccarat incarne l'excellence du savoir-faire français. Ses maîtres-verriers perpétuent des techniques ancestrales pour créer des pièces d'exception reconnues dans le monde entier.",
-    category: 'artisanat',
+    category: 'luxe',
     date: getDynamicDate(12), // Il y a 12 jours
     source: 'Baccarat',
     imageUrl: '/images/art-baccarat.jpg'

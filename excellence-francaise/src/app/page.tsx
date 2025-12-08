@@ -6,7 +6,7 @@ import HeroBanner from '@/components/HeroBanner';
 import QuotesSection from '@/components/QuotesSection';
 import PeupleElite from '@/components/PeupleElite';
 import NewsFeed from '@/components/NewsFeed';
-import Timeline from '@/components/Timeline';
+import FriseChronologique from '@/components/FriseChronologique';
 import Portraits from '@/components/Portraits';
 import Footer from '@/components/Footer';
 
@@ -118,7 +118,7 @@ export default function Home() {
 
       {/* Timeline (Histoire) */}
       <div ref={histoireRef}>
-        <Timeline />
+        <FriseChronologique />
       </div>
 
       {/* Section Divider */}

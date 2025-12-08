@@ -40,14 +40,10 @@ const RSS_SOURCES = {
     'https://www.konbini.com/feed/',
   ],
   
-  // ART DE VIVRE (Gastronomie, Mode, Luxe)
-  art_de_vivre: [
+  // LUXE & MODE (Art de vivre, Gastronomie, Mode)
+  luxe_mode: [
     'https://www.atabula.com/feed/',
     'https://fr.fashionnetwork.com/rss/news',
-  ],
-  
-  // ARTISANAT & MÉTIERS
-  artisanat_metiers: [
     'https://www.artisanat.fr/feed/',
   ],
   
@@ -118,6 +114,14 @@ const NEGATIVE_KEYWORDS = [
   'crise', 'échec', 'faillite', 'licenciement', 'fermeture',
   'condamne', 'condamnation', 'prison', 'procès',
   'grève', 'manifestation', 'émeute',
+  // Sport négatif - exclure salaires, argent, transferts
+  'salaire', 'salaires', 'rémunération', 'prime', 'primes', 'bonus',
+  'millions d\'euros', 'fortune', 'revenus', 'combien gagne', 'patrimoine',
+  'transfert', 'mercato', 'rumeur', 'négociations', 'prolongation contrat',
+  'blessure', 'blessé', 'forfait', 'indisponible', 'absent',
+  'défaite', 'éliminé', 'élimination', 'perdre', 'perdu',
+  'interview après-match', 'conférence de presse', 'réaction', 'débrief',
+  'clash', 'altercation', 'tension', 'dispute', 'insulte',
   'agression', 'violence', 'attaque', 'attentat',
   'macron', 'barnier', 'le pen', 'mélenchon', 'bardella',
   'gouvernement', 'assemblée nationale', 'motion de censure',
@@ -208,11 +212,11 @@ const FEATURED_ARTICLES: Article[] = [
   {
     title: "Hermès : le sellier devenu empire du luxe mondial",
     excerpt: "Fondée en 1837 par Thierry Hermès, la maison française est devenue le symbole ultime du luxe à la française. Avec ses carrés de soie, ses sacs Birkin et Kelly, Hermès incarne l'excellence artisanale française reconnue dans le monde entier.",
-    link: "https://www.hermes.com/fr/fr/story/maison-hermes/",
+    link: "https://fr.wikipedia.org/wiki/Herm%C3%A8s_International",
     date: new Date().toISOString(),
     category: "luxe",
     image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=800&q=80",
-    source: "Hermès - Site officiel",
+    source: "Wikipedia France",
     score: 10
   },
   {
